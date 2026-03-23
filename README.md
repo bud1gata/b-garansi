@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Warranty & Service Tracker (WST)
 
-## Getting Started
+A comprehensive web platform that empowers users to easily archive purchase receipts, automatically monitor real-time warranty expirations, and meticulously log the maintenance history of their personal assets and devices.
 
-First, run the development server:
+## Features
+- **Asset Management**: Seamlessly add devices (laptops, phones, cameras, vehicles) alongside purchase dates and warranty durations.
+- **Smart Warranty Tracking**: The dashboard clearly visualizes remaining warranty durations via a simple traffic-light color system (Green = Active, Yellow = Expiring soon, Red = Expired).
+- **Service Logging**: Keep track of every repair, exactly what the issue was, and how much it cost over time.
+- **Digital Receipt Vault**: Upload photos/PDFs of your purchase receipts to a secure lightbox viewer so you never lose them when claiming warranties.
+- **Secure Authentication**: Built-in user registration and JWT-based session management to keep your asset data private.
 
+## Tech Stack
+**Frontend:**
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS (Modern Glassmorphism UI)
+- **Icons & Tooling:** Lucide React, date-fns
+
+**Backend:**
+- **Framework:** Node.js + Express.js
+- **Database:** MongoDB (via Mongoose)
+- **Authentication:** JSON Web Tokens (JWT) + bcryptjs
+- **File Uploads:** Multer (Local storage processing)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v16.x or newer recommended)
+- A [MongoDB Cluster URI](https://www.mongodb.com/) for the backend `.env` file.
+
+### Installation
+
+1. **Clone or navigate to the project repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd b-garansi
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install Frontend Dependencies** (at the root level)
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Install Backend Dependencies**
+```bash
+cd backend
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Environment Configuration
+Ensure you have the following `.env` files created based on the examples:
 
-## Learn More
+**1. Root (`/b-garansi/.env.local` for Next.js)**
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
 
-To learn more about Next.js, take a look at the following resources:
+**2. Backend (`/b-garansi/backend/.env` for Express)**
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/?appName=cluster
+JWT_SECRET=supersecretjwtkey123
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💻 Running the Application
 
-## Deploy on Vercel
+To run the application locally, you'll need to spin up both the Frontend and the Backend simultaneously. The easiest way is to open two separate terminal windows.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Terminal 1 (Backend Server)**
+```bash
+cd backend
+npm run dev
+```
+*(The API will start listening on `http://localhost:5000`)*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Terminal 2 (Frontend Server)**
+```bash
+# From the project root (b-garansi)
+npm run dev
+```
+*(The UI will compile and become available at `http://localhost:3000`)*
+
+You can now navigate your browser to **[http://localhost:3000](http://localhost:3000)** to register your first account!
+
+---
+
+## Folder Structure
+```text
+b-garansi/                # Next.js Frontend Root
+├── app/                  # App Router Pages & Layouts
+├── components/           # Reusable React components (UI, Items, Navbar)
+├── context/              # React Context (AuthContext)
+├── lib/                  # Utilities (API fetch wrapper)
+├── backend/              # Express.js API Sub-folder
+│   ├── controllers/      # API logic (Items, Services, Auth)
+│   ├── models/           # Mongoose schemas
+│   ├── routes/           # Express routers
+│   ├── middleware/       # JWT token auth & Multer upload config
+│   ├── uploads/          # Locally hosted digital receipt images
+│   └── server.js         # Backend Entry Point
+└── README.md
+```
