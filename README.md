@@ -8,6 +8,7 @@ A comprehensive web platform that empowers users to easily archive purchase rece
 - **Service Logging**: Keep track of every repair, exactly what the issue was, and how much it cost over time.
 - **Digital Receipt Vault**: Upload photos/PDFs of your purchase receipts to a secure lightbox viewer so you never lose them when claiming warranties.
 - **Secure Authentication**: Built-in user registration and JWT-based session management to keep your asset data private.
+- **Admin Approval Workflow**: An exclusive Admin dashboard ensures total platform security by requiring manual approval for new users before they can access the application.
 
 ## Tech Stack
 **Frontend:**
