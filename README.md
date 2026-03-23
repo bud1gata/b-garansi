@@ -103,3 +103,9 @@ b-garansi/                # Next.js Frontend Root
 │   └── server.js         # Backend Entry Point
 └── README.md
 ```
+
+---
+
+## 📬 Contact
+For any inquiries, feel free to reach out to the project creator:
+- **Email:** [me@budiputra.web.id](mailto:me@budiputra.web.id)
