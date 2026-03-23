@@ -22,6 +22,11 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {user ? (
             <>
+              {user.role === 'admin' && (
+                <Link href="/admin" className="text-sm font-medium px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors dark:bg-indigo-900/30 dark:text-indigo-400 dark:hover:bg-indigo-900/50">
+                  🛡️ Admin Panel
+                </Link>
+              )}
               <Link href="/items/new" className="text-sm font-medium px-4 py-2 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50">
                 + Add Asset
               </Link>

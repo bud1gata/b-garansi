@@ -30,8 +30,14 @@ export default function RegisterPage() {
       });
 
       if (res.success) {
-        login(res.token, res.user);
-        router.push("/");
+        if (res.token) {
+          login(res.token, res.user);
+          router.push("/");
+        } else {
+          // Pending approval scenario
+          alert(res.message || "Registration successful! Your account is pending admin approval.");
+          router.push("/login");
+        }
       }
     } catch (err: any) {
       setError(err.message || "Failed to register.");

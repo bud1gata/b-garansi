@@ -7,6 +7,8 @@ interface User {
   id: string;
   username: string;
   email: string;
+  role: 'user' | 'admin';
+  isApproved: boolean;
 }
 
 interface AuthContextType {
@@ -38,7 +40,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
       const res = await fetchApi('/auth/me');
       if (res.success) {
-        setUser({ id: res.data._id, username: res.data.username, email: res.data.email });
+        setUser({ 
+          id: res.data._id, 
+          username: res.data.username, 
+          email: res.data.email,
+          role: res.data.role,
+          isApproved: res.data.isApproved
+        });
       }
     } catch (error) {
       console.error('Auth error', error);

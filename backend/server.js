@@ -30,11 +30,13 @@ app.get('/api/health', (req, res) => {
 const auth = require('./routes/auth');
 const items = require('./routes/items');
 const services = require('./routes/services');
+const admin = require('./routes/admin');
 
 // Define Routes
 app.use('/api/auth', auth);
 app.use('/api/items', items);
 app.use('/api/services', services);
+app.use('/api/admin', admin);
 
 const PORT = process.env.PORT || 5000;
 

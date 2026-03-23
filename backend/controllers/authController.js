@@ -25,13 +25,27 @@ const sendTokenResponse = (user, statusCode, res) => {
 exports.register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    
+    // Automatically make admin@wst.com the admin user and approve them
+    const role = email === 'admin@wst.com' ? 'admin' : 'user';
+    const isApproved = email === 'admin@wst.com' ? true : false;
+    
     const user = await User.create({
       username,
       email,
-      password
+      password,
+      role,
+      isApproved
     });
 
-    sendTokenResponse(user, 201, res);
+    if (user.isApproved) {
+      sendTokenResponse(user, 201, res);
+    } else {
+      res.status(201).json({
+        success: true,
+        message: 'Registration successful! Your account is pending admin approval before you can log in.'
+      });
+    }
   } catch (err) {
     res.status(400).json({ success: false, error: err.message });
   }
@@ -61,6 +75,11 @@ exports.login = async (req, res) => {
 
     if (!isMatch) {
       return res.status(401).json({ success: false, error: 'Invalid credentials' });
+    }
+
+    // Admin approval check
+    if (!user.isApproved) {
+      return res.status(403).json({ success: false, error: 'Your account is pending approval by the administrator.' });
     }
 
     sendTokenResponse(user, 200, res);
