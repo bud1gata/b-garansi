@@ -85,6 +85,9 @@ npm run dev
 
 You can now navigate your browser to **[http://localhost:3000](http://localhost:3000)** to register your first account!
 
+> [!IMPORTANT]
+> **Admin Account Setup:** By default, new users cannot log in until an Administrator approves their account. To claim the Admin role, you must create your very first account using the exact email address: **`admin@wst.com`**. This specific email will automatically trigger the system to grant you full "Admin Dashboard" access where you can approve all subsequent users.
+
 ---
 
 ## Folder Structure
